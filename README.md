@@ -272,11 +272,11 @@ for chunk in llm.stream("Your input here"):
 ## Available Models
 
 Groq offers several high-performance models you can use:
-
-- `llama-3.3-70b-versatile` - Best overall performance
-- `llama-3.1-8b-instant` - Fastest responses
-- `llama-3.1-70b-versatile` - High quality, versatile
-- `mixtral-8x7b-32768` - Large context window
+- `llama-3.3-70b-versatile`
+- `llama-3.1-8b-instant`
+- `meta-llama/llama-4-scout-17b-16e-instruct`
+- `meta-llama/llama-4-maverick-17b-128e-instruct`
+- [...and more](https://console.groq.com/docs/models)
 
 ## Next Steps
 
