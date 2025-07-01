@@ -120,21 +120,6 @@ cd groq-langchain
    uv sync
    ```
 
-   **Alternative setup with pip and venv:**
-   ```bash
-   # Create virtual environment
-   python3 -m venv langchain-env
-   
-   # Activate it
-   # On macOS/Linux:
-   source langchain-env/bin/activate
-   # On Windows:
-   langchain-env\Scripts\activate
-   
-   # Install dependencies
-   pip install langchain-groq python-dotenv
-   ```
-
 3. **Configure environment variables**
    ```bash
    # Create .env file with your API key
@@ -143,11 +128,8 @@ cd groq-langchain
 
 4. **Run the example**
    ```bash
-   # With uv
    uv run main.py
-   
-   # With standard Python
-   python main.py
+  
    ```
 
 ## Examples
