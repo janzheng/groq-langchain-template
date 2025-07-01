@@ -20,7 +20,12 @@ This repository is a complete starter template for building AI applications with
 
 ## Overview
 
-This application demonstrates how to build production-ready AI applications using Groq API for ultra-fast language model inference and LangChain for advanced prompt engineering and output parsing. Built as a complete, end-to-end template that you can fork, customize, and deploy.
+This collection shows how to build production-ready AI applications using Groq API for ultra-fast language model inference and LangChain for advanced prompt engineering and output parsing. These are complete, working templates that you can fork, customize, and deploy.
+
+The product information extraction example has been implemented across both Python and JavaScript, demonstrating how to parse unstructured product descriptions into structured JSON data with guaranteed output formats.
+
+**What You'll Learn:**
+By exploring these templates, you'll learn practical patterns for combining Groq's fast inference with LangChain's orchestration capabilities in both JavaScript and Python. Each example includes error handling, retry logic, and real-world use cases that you can adapt for your own applications.
 
 ### What This Template Includes
 
@@ -40,10 +45,10 @@ This application demonstrates how to build production-ready AI applications usin
 ## Architecture
 
 **Tech Stack:**
-- **Backend:** Python with LangChain + Groq
-- **Frontend/Alternative:** JavaScript/TypeScript with LangChain + Groq
-- **AI Infrastructure:** Groq API (Llama 3.3 70B Versatile)
-- **Framework:** LangChain for prompt engineering and output parsing
+- **AI Framework:** LangChain for prompt engineering and output parsing
+- **Language Models:** Groq API (Llama 3.3 70B Versatile)
+- **Runtime:** Node.js with ES modules (JavaScript) / Python 3.9+ (Python)
+- **Package Management:** npm/yarn (JavaScript) / uv (Python)
 
 **AI Pipeline:**
 - **Language Model:** Groq Llama 3.3 70B Versatile
@@ -54,17 +59,16 @@ This application demonstrates how to build production-ready AI applications usin
 ## Quick Start
 
 ### Prerequisites
-
-- Python 3.9 or later (for Python example)
-- Node.js 18+ and npm/yarn (for JavaScript example)
-- Groq API key ([Get your free API key here](https://console.groq.com/keys))
+- **For JavaScript:** Node.js 18+ and npm/yarn
+- **For Python:** Python 3.9+ and [uv](https://docs.astral.sh/uv/) package manager (recommended)
+- **Groq API key:** [Get your free API key here](https://console.groq.com/keys)
 
 ### Setup
 
 #### 1. Clone the repository
 ```bash
 gh repo clone janzheng/groq-langchain-template
-cd groq-templates/groq-langchain-template
+cd groq-langchain
 ```
 
 #### 2. Get your Groq API key
@@ -72,91 +76,90 @@ cd groq-templates/groq-langchain-template
 2. Create a new API key
 3. Copy the key for use in environment variables
 
-### Python Installation
+### JavaScript Setup
 
-#### 1. Set up Python Environment
+1. **Navigate to JavaScript examples**
+   ```bash
+   cd groq-langchain/js-examples
+   ```
 
-**Using uv (Recommended):**
-```bash
-# Initialize project
-uv init
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
 
-# Add dependencies
-uv add langchain-groq python-dotenv
+3. **Configure environment variables**
+   ```bash
+   # Create .env file with your API key
+   echo "GROQ_API_KEY=your_groq_api_key_here" > .env
+   ```
 
-# Run the example
-uv run main.py
-```
+4. **Run the example**
+   ```bash
+   # Product Information Extraction
+   node main.js
+   ```
 
-**Using pip and venv:**
-```bash
-# Create virtual environment
-python3 -m venv langchain-env
+### Python Setup
 
-# Activate it
-# On macOS/Linux:
-source langchain-env/bin/activate
-# On Windows:
-langchain-env\Scripts\activate
+1. **Navigate to Python examples**
+   ```bash
+   cd groq-langchain/py-examples
+   ```
 
-# Install dependencies
-pip install langchain-groq python-dotenv
+2. **Initialize and activate virtual environment with uv**
+   ```bash
+   # Initialize the project (if not already done)
+   uv init
+   
+   # Create and activate virtual environment
+   uv venv
+   source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+   
+   # Install dependencies
+   uv sync
+   ```
 
-# Run the example
-python main.py
-```
+   **Alternative setup with pip and venv:**
+   ```bash
+   # Create virtual environment
+   python3 -m venv langchain-env
+   
+   # Activate it
+   # On macOS/Linux:
+   source langchain-env/bin/activate
+   # On Windows:
+   langchain-env\Scripts\activate
+   
+   # Install dependencies
+   pip install langchain-groq python-dotenv
+   ```
 
-#### 2. Environment Variables
+3. **Configure environment variables**
+   ```bash
+   # Create .env file with your API key
+   echo "GROQ_API_KEY=your_groq_api_key_here" > .env
+   ```
 
-Create `.env` in the root directory:
-```bash
-GROQ_API_KEY=your-groq-api-key-here
-```
+4. **Run the example**
+   ```bash
+   # With uv
+   uv run main.py
+   
+   # With standard Python
+   python main.py
+   ```
 
-#### 3. Run the Python Example
+## Examples
 
-```bash
-# With uv
-uv run main.py
+The product information extraction example demonstrates:
 
-# With standard Python
-python main.py
-```
+- **Schema Validation:** Uses LangChain's JsonOutputParser for guaranteed JSON responses
+- **Product Details:** Extracts name, price, and features from descriptions
+- **Error Handling:** Includes retry logic and validation
+- **Real-world Example:** Processes espresso machine descriptions
 
-### JavaScript Installation
-
-#### 1. Install Node.js Dependencies
-
-**Using yarn (Recommended):**
-```bash
-# Install dependencies
-yarn add @langchain/groq @langchain/core dotenv
-
-# Run the example
-node main.js
-```
-
-**Using npm:**
-```bash
-# Install dependencies
-npm install @langchain/groq @langchain/core dotenv
-
-# Run the example
-node main.js
-```
-
-#### 2. Environment Variables
-
-Create `.env` in the root directory (same as Python):
-```bash
-GROQ_API_KEY=your-groq-api-key-here
-```
-
-#### 3. Run the JavaScript Example
-
-```bash
-node main.js
-```
+**JavaScript:** `js-examples/main.js` | **Python:** `py-examples/main.py`
 
 ## Example Output
 
@@ -188,14 +191,26 @@ The Kees Van Der Westen Speedster is a high-end, single-group espresso machine k
 
 This template is designed to be a foundation for you to build upon. Key areas for customization:
 
+### JavaScript Customization
+- **Model Selection:** Update Groq model configuration in `js-examples/main.js`
+- **Output Schema:** Modify the JSON schema for your specific data structure
+- **Prompt Templates:** Customize the system prompt for your use case
+- **Error Handling:** Adjust retry logic and validation rules
+
+### Python Customization
+- **Model Configuration:** Change model settings in `py-examples/main.py`
+- **Schema Definition:** Update the JSON schema for your data requirements
+- **System Prompts:** Customize the agent's behavior and capabilities
+- **Output Parsing:** Extend with more complex parsing logic
+
 ### Model Configuration
 ```python
-# Python - Change model in main.py
+# Python - Change model in py-examples/main.py
 llm = ChatGroq(model_name="llama-3.1-8b-instant", temperature=0.5)
 ```
 
 ```javascript
-// JavaScript - Change model in main.js
+// JavaScript - Change model in js-examples/main.js
 const llm = new ChatGroq({
   model: "llama-3.1-8b-instant",
   temperature: 0.5,
@@ -260,6 +275,26 @@ for chunk in llm.stream("Your input here"):
     print(chunk.content, end="")
 ```
 
+## API Keys Required
+
+- **Groq API Key:** Used for LLM inference across all examples in both JavaScript and Python
+
+## Files Structure
+
+```
+groq-langchain/
+├── js-examples/             # JavaScript examples
+│   ├── .env                 # Stores your Groq API key
+│   ├── main.js              # Product information extraction
+│   └── package.json         # JS dependencies
+├── py-examples/             # Python examples
+│   ├── .env                 # Stores your Groq API key
+│   ├── main.py              # Product information extraction
+│   ├── pyproject.toml       # Python dependencies
+│   └── uv.lock              # Lock file for uv
+└── README.md                # This file
+```
+
 ## Troubleshooting
 
 **Common Issues:**
@@ -281,14 +316,14 @@ Groq offers several high-performance models you can use:
 ## Next Steps
 
 ### For Developers
+- **Create your free GroqCloud account:** Access API docs, the playground, and more resources via [Groq Console](https://console.groq.com)
 - **Explore LangChain:** [LangChain Documentation](https://python.langchain.com/docs/get_started/introduction)
-- **Groq Models:** [Available Models and Pricing](https://console.groq.com/docs/models)
-- **Advanced Patterns:** Build multi-agent systems, RAG applications, and more
-- **Production Deployment:** Scale your application with proper monitoring and error handling
+- **Build and customize:** Fork this repo and start customizing for your own application
+- **Get support:** Connect with other developers building on Groq, chat with our team, and submit feature requests on our [Groq Developer Forum](https://community.groq.com)
 
 ### For Founders and Business Leaders
-- **See enterprise capabilities:** This template showcases production-ready AI that can handle business workloads
-- **Discuss Your needs:** [Contact Groq's team](https://groq.com/enterprise-access/) to explore enterprise solutions
+- **See capabilities:** These templates show AI that can handle business workloads with fast response times
+- **Discuss your needs:** [Contact our team](https://groq.com/enterprise-access/) to explore how Groq can help your AI initiatives
 
 ## Resources
 
